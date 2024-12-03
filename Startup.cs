@@ -38,6 +38,7 @@ namespace pruebahotel
 
             //configurar el servicio para que pueda ser usado
             services.AddTransient<HabitacionServices>();
+            services.AddTransient<HotelServices>();
 
             services.AddSwaggerGen(c =>
             {
