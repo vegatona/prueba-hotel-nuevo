@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using pruebahotel.Data;
+using pruebahotel.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,10 @@ namespace pruebahotel
             services.AddControllers();
             //configuracion dbcontext con sql
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+
+            //configurar el servicio para que pueda ser usado
+            services.AddTransient<HabitacionServices>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "pruebahotel", Version = "v1" });
