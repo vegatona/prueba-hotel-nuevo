@@ -58,6 +58,5 @@ namespace pruebahotel.Controllers
             _habitacionService.DeleteHabitacionById(id);
             return Ok();
         }
-
     }
 }

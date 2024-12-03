@@ -27,36 +27,36 @@ namespace pruebahotel.Data.Services
             };
             _context.hotels.Add(_hotel);
             _context.SaveChanges();
-        }/*
+        }
         //listar
         public List<Hotel> GetHotels() => _context.hotels.ToList();
         //bustar
-        public Hotel GetHotelById(int idhabitacion) => _context.habitaciones.FirstOrDefault(n => n.Id_habitacion == idhabitacion);
+        public Hotel GetHotelById(int idhotel) => _context.hotels.FirstOrDefault(n => n.id_hotel == idhotel);
         //editar
-        public Habitacion UpdateHabitacionById(int idhabitacion, HabitacionVM habitacion)
+        public Hotel UpdateHotelById(int idhotel, HotelVM hotel)
         {
-            var _habitacion = _context.habitaciones.FirstOrDefault(n => n.Id_habitacion == idhabitacion);
-            if (_habitacion != null)
+            var _hotel = _context.hotels.FirstOrDefault(n => n.id_hotel == idhotel);
+            if (_hotel != null)
             {
-                _habitacion.Numero_habitacion = habitacion.Numero_habitacion;
-                _habitacion.tipo = habitacion.tipo;
-                _habitacion.capacidad = habitacion.capacidad;
-                _habitacion.precio_noche = habitacion.precio_noche;
-                _habitacion.estado = habitacion.estado;
+                _hotel.nombre = hotel.nombre;
+                _hotel.direccion = hotel.direccion;
+                _hotel.telefono = hotel.telefono;
+                _hotel.horarios = hotel.horarios;
+                _hotel.descripcion = hotel.descripcion;
 
                 _context.SaveChanges();
             }
-            return _habitacion;
+            return _hotel;
         }
         //eliminar
-        public void DeleteHabitacionById(int idhabitacion)
+        public void DeleteHotelById(int idhotel)
         {
-            var _habitacion = _context.habitaciones.FirstOrDefault(n => n.Id_habitacion == idhabitacion);
-            if (_habitacion != null)
+            var _hotel = _context.hotels.FirstOrDefault(n => n.id_hotel == idhotel);
+            if (_hotel != null)
             {
-                _context.habitaciones.Remove(_habitacion);
+                _context.hotels.Remove(_hotel);
                 _context.SaveChanges();
             }
-        }*/
+        }
     }
 }
