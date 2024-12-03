@@ -60,6 +60,7 @@ namespace pruebahotel
             {
                 endpoints.MapControllers();
             });
+            AppDbInitializer.Seed(app);
         }
     }
 }
