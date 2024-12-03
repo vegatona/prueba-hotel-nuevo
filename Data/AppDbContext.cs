@@ -10,7 +10,8 @@ namespace pruebahotel.Data
 
         }
         public DbSet<Hotel> hotels { get; set; }
-        public DbSet<Habitacion> habitaciones { get;set; }
-
+        public DbSet<Habitacion> habitaciones { get ;set; }
+        public DbSet<reservaciones> Reservaciones { get; set; }
+        public DbSet<Usuario> usuarios { get; set; }
     }
 }

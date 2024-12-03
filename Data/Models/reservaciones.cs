@@ -1,10 +1,12 @@
-﻿using Microsoft.VisualBasic;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.VisualBasic;
 using System;
 
 namespace pruebahotel.Data.Models
 {
     public class reservaciones
     {
+        [Key]
         public int id_reservacion { get; set; }
         public int id_habitacion { get; set; }
         public DateTime fecha_inicio { get; set; }
