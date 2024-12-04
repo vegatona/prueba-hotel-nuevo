@@ -2,6 +2,7 @@
 using pruebahotel.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace pruebahotel.Data.Services
 {
@@ -44,6 +45,10 @@ namespace pruebahotel.Data.Services
 
                 _context.SaveChanges();
             }
+            else
+            {
+                throw new Exception("El usuario no se puede modificar!");
+            }
             return _usuario;
         }
         //eliminar
@@ -54,6 +59,10 @@ namespace pruebahotel.Data.Services
             {
                 _context.usuarios.Remove(_usuario);
                 _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception($"El usuario con el id {idusuario} no existe!");
             }
         }
     }

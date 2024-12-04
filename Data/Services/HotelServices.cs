@@ -22,7 +22,6 @@ namespace pruebahotel.Data.Services
                 nombre = hotel.nombre,
                 direccion = hotel.direccion,
                 telefono = hotel.telefono,
-                horarios = hotel.horarios,
                 descripcion = hotel.descripcion
             };
             _context.hotels.Add(_hotel);
@@ -41,10 +40,13 @@ namespace pruebahotel.Data.Services
                 _hotel.nombre = hotel.nombre;
                 _hotel.direccion = hotel.direccion;
                 _hotel.telefono = hotel.telefono;
-                _hotel.horarios = hotel.horarios;
                 _hotel.descripcion = hotel.descripcion;
 
                 _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("El hotel no se pudo modificar!");
             }
             return _hotel;
         }
@@ -56,6 +58,10 @@ namespace pruebahotel.Data.Services
             {
                 _context.hotels.Remove(_hotel);
                 _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception($"El hotel con el id {idhotel} no existe!");
             }
         }
     }

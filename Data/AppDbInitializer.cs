@@ -24,7 +24,7 @@ namespace pruebahotel.Data
                         nombre = "1st hotel",
                         direccion = "1st direccion",
                         telefono = 4456122,
-                        horarios = DateTime.Now.AddDays(-10),
+                        horarios = "Check-in: 14:00, Check-out: 12:00",
                         descripcion = "bonito",
                     },
                     new Hotel()
@@ -32,66 +32,12 @@ namespace pruebahotel.Data
                         nombre = "2nd hotel",
                         direccion = "2nd direccion",
                         telefono = 563360125,
-                        horarios = DateTime.Now.AddDays(-10),
+                        horarios = "Check-in: 1:00, Check-out: 1:00",
                         descripcion = "malo",
                     });
                     context.SaveChanges();
                 }
-                //habitaciones
-                if (!context.habitaciones.Any())
-                {
-                    context.habitaciones.AddRange(new Habitacion()
-                    {
-                        Numero_habitacion = 101,
-                        tipo = "suit",
-                        capacidad = 4,
-                        precio_noche = 250,
-                        estado = "disponible",
-                    },
-                    new Habitacion()
-                    {
-                        Numero_habitacion = 201,
-                        tipo = "basica",
-                        capacidad = 2,
-                        precio_noche = 170,
-                        estado = "ocupada",
-                    },
-                    new Habitacion()
-                    {
-                        Numero_habitacion = 301,
-                        tipo = "sencilla",
-                        capacidad = 1,
-                        precio_noche = 87,
-                        estado = "mantenimiento",
-                    });
-                    context.SaveChanges();
-                }
-                //reservaciones
-                if (!context.Reservaciones.Any())
-                {
-                    context.Reservaciones.AddRange(new reservaciones()
-                    {
-                        id_habitacion = 1,
-                        fecha_inicio = DateTime.Now.AddDays(-10),
-                        fecha_final = DateTime.Now.AddDays(-10),
-                        estado = "cancelada",
-                    },
-                    new reservaciones()
-                    {
-                        id_habitacion = 2,
-                        fecha_inicio = DateTime.Now.AddDays(-10),
-                        fecha_final = DateTime.Now.AddDays(-10),
-                        estado = "confirmada",
-                    },
-                    new reservaciones()
-                    {
-                        id_habitacion = 3,
-                        fecha_inicio = DateTime.Now.AddDays(-10),
-                        fecha_final = DateTime.Now.AddDays(-10),
-                        estado = "pendiente",
-                    });
-                    context.SaveChanges();
-                }
+                
                 //usuarios
                 if (!context.usuarios.Any())
                 {

@@ -23,40 +23,75 @@ namespace pruebahotel.Controllers
         [HttpGet("Listar todas las usuarios")]
         public IActionResult Getallusuario()
         {
-            var allusuario = _usuarioService.GetUsuarios();
-            return Ok(allusuario);
+            try
+            {
+                var allusuario = _usuarioService.GetUsuarios();
+                return Ok(allusuario);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //buscar usaurio
         [HttpGet("Buscar usuario/{id}")]
         public IActionResult GetusaurioById(int id)
         {
-            var usuario = _usuarioService.GetUsuarioById(id);
-            return Ok(usuario);
+            try
+            {
+                var usuario = _usuarioService.GetUsuarioById(id);
+                return Ok(usuario);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //agregar usuario
         [HttpPost("Agregar usuario")]
         public IActionResult Addusuario([FromBody] UsuarioVM usuario)
         {
-            _usuarioService.AddUsuario(usuario);
-            return Ok();
+            try
+            {
+                _usuarioService.AddUsuario(usuario);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //Editar usuario
         [HttpPut("Modificar usuario/{id}")]
         public IActionResult UpdateusuarioById(int id, [FromBody] UsuarioVM usuario)
         {
-            var updateusuario = _usuarioService.UpdateUsuarioById(id, usuario);
-            return Ok(updateusuario);
+            try
+            {
+                var updateusuario = _usuarioService.UpdateUsuarioById(id, usuario);
+                return Ok(updateusuario);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //Eliminar usuario
         [HttpDelete("Eliminar usuario/{id}")]
         public IActionResult DeleteUsaurioById(int id)
         {
-            _usuarioService.DeleteusuarioById(id);
-            return Ok();
+            try
+            {
+                _usuarioService.DeleteusuarioById(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

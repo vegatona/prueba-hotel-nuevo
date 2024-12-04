@@ -7,6 +7,7 @@ namespace pruebahotel.Data.ViewModels
 {
     public class HabitacionVM
     {
+        public int id_hotel { get; set; }
         public int Numero_habitacion { get; set; }
         public string tipo { get; set; }
         public int capacidad { get; set; }

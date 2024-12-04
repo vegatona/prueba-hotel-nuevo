@@ -23,40 +23,75 @@ namespace pruebahotel.Controllers
         [HttpGet("Listar todas las hoteles")]
         public IActionResult Getallhotel()
         {
-            var allhoteles = _hotelService.GetHotels();
-            return Ok(allhoteles);
+            try
+            {
+                var allhoteles = _hotelService.GetHotels();
+                return Ok(allhoteles);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //buscar hotel
         [HttpGet("Buscar hotel/{id}")]
         public IActionResult GethotelById(int id)
         {
-            var hotel = _hotelService.GetHotelById(id);
-            return Ok(hotel);
+            try
+            {
+                var hotel = _hotelService.GetHotelById(id);
+                return Ok(hotel);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //agregar hotel
         [HttpPost("Agregar hotel")]
         public IActionResult Addhotel([FromBody] HotelVM hotel)
         {
-            _hotelService.AddHoteles(hotel);
-            return Ok();
+            try
+            {
+                _hotelService.AddHoteles(hotel);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //Editar hotel
         [HttpPut("Modificar hotel/{id}")]
         public IActionResult UpdatehotelById(int id, [FromBody] HotelVM hotel)
         {
-            var updatehotel = _hotelService.UpdateHotelById(id, hotel);
-            return Ok(updatehotel);
+            try
+            {
+                var updatehotel = _hotelService.UpdateHotelById(id, hotel);
+                return Ok(updatehotel);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         //Eliminar hotel
         [HttpDelete("Eliminar hotel/{id}")]
         public IActionResult DeletehotelById(int id)
         {
-            _hotelService.DeleteHotelById(id);
-            return Ok();
+            try
+            {
+                _hotelService.DeleteHotelById(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

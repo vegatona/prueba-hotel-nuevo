@@ -19,12 +19,43 @@ namespace pruebahotel.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("pruebahotel.Data.Models.DetalleReservacion", b =>
+                {
+                    b.Property<int>("IdDetalle")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdHabitacion")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdReserva")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPagado")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdDetalle");
+
+                    b.HasIndex("IdHabitacion");
+
+                    b.HasIndex("IdReserva");
+
+                    b.ToTable("DetallesReservacion");
+                });
+
             modelBuilder.Entity("pruebahotel.Data.Models.Habitacion", b =>
                 {
                     b.Property<int>("Id_habitacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Hotelid_hotel1")
+                        .HasColumnType("int");
 
                     b.Property<int>("Numero_habitacion")
                         .HasColumnType("int");
@@ -33,15 +64,24 @@ namespace pruebahotel.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("estado")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("id_hotel")
+                        .HasColumnType("int");
 
                     b.Property<int>("precio_noche")
                         .HasColumnType("int");
 
                     b.Property<string>("tipo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id_habitacion");
+
+                    b.HasIndex("Hotelid_hotel1");
+
+                    b.HasIndex("id_hotel");
 
                     b.ToTable("habitaciones");
                 });
@@ -57,12 +97,14 @@ namespace pruebahotel.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("direccion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("horarios")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("horarios")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("telefono")
@@ -87,12 +129,15 @@ namespace pruebahotel.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("rol")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id_usuario");
@@ -107,7 +152,11 @@ namespace pruebahotel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
                     b.Property<string>("estado")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("fecha_final")
@@ -116,15 +165,74 @@ namespace pruebahotel.Migrations
                     b.Property<DateTime>("fecha_inicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("id_habitacion")
-                        .HasColumnType("int");
-
                     b.Property<int>("total_pagado")
                         .HasColumnType("int");
 
                     b.HasKey("id_reservacion");
 
+                    b.HasIndex("IdUsuario");
+
                     b.ToTable("Reservaciones");
+                });
+
+            modelBuilder.Entity("pruebahotel.Data.Models.DetalleReservacion", b =>
+                {
+                    b.HasOne("pruebahotel.Data.Models.Habitacion", "Habitacion")
+                        .WithMany()
+                        .HasForeignKey("IdHabitacion")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("pruebahotel.Data.Models.reservaciones", "Reservaciones")
+                        .WithMany("DetallesReservacion")
+                        .HasForeignKey("IdReserva")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Habitacion");
+
+                    b.Navigation("Reservaciones");
+                });
+
+            modelBuilder.Entity("pruebahotel.Data.Models.Habitacion", b =>
+                {
+                    b.HasOne("pruebahotel.Data.Models.Hotel", null)
+                        .WithMany("Habitaciones")
+                        .HasForeignKey("Hotelid_hotel1");
+
+                    b.HasOne("pruebahotel.Data.Models.Hotel", "Hotel")
+                        .WithMany()
+                        .HasForeignKey("id_hotel")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hotel");
+                });
+
+            modelBuilder.Entity("pruebahotel.Data.Models.reservaciones", b =>
+                {
+                    b.HasOne("pruebahotel.Data.Models.Usuario", "Usuario")
+                        .WithMany("Reservaciones")
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("pruebahotel.Data.Models.Hotel", b =>
+                {
+                    b.Navigation("Habitaciones");
+                });
+
+            modelBuilder.Entity("pruebahotel.Data.Models.Usuario", b =>
+                {
+                    b.Navigation("Reservaciones");
+                });
+
+            modelBuilder.Entity("pruebahotel.Data.Models.reservaciones", b =>
+                {
+                    b.Navigation("DetallesReservacion");
                 });
 #pragma warning restore 612, 618
         }
