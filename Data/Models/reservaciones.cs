@@ -19,9 +19,7 @@ namespace pruebahotel.Data.Models
         [RegularExpression("Pendiente|Confirmada|Cancelada", ErrorMessage = "El estado de la reservación debe ser 'Pendiente', 'Confirmada' o 'Cancelada'.")]
         public string estado { get; set; }
         public int total_pagado { get; set; }
-        // Relación con usuario
         public Usuario Usuario { get; set; }
-        // Relación con detalles
         public ICollection<DetalleReservacion> DetallesReservacion { get; set; }
 
     }

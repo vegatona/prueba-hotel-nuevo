@@ -8,8 +8,6 @@ namespace pruebahotel.Data.Models
         public int IdDetalle { get; set; }
         public int IdReserva { get; set; }
         public int IdHabitacion { get; set; }
-        public string Estado { get; set; }
-        public decimal TotalPagado { get; set; }
 
         // Relación con reservación y habitación
         public reservaciones Reservaciones { get; set; }

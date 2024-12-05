@@ -19,9 +19,9 @@ namespace pruebahotel.Controllers
             _detallesreservaservice = detalleServices;
         }
 
-        //listar hotel
-        [HttpGet("Listar todas los detalles de las reservaciones")]
-        public IActionResult GetallDetalles()
+        // Listar todos los detalles de las reservaciones
+        [HttpGet("Listar todas las detalles de las reservaciones")]
+        public IActionResult GetAllDetalles()
         {
             try
             {
@@ -34,13 +34,17 @@ namespace pruebahotel.Controllers
             }
         }
 
-        //buscar hotel
+        // Buscar detalles de la reservación por ID
         [HttpGet("Buscar detalles/{id}")]
-        public IActionResult GetalldetallesById(int id)
+        public IActionResult GetDetallesById(int id)
         {
             try
             {
                 var detalle = _detallesreservaservice.GetDetallesById(id);
+                if (detalle == null)
+                {
+                    return NotFound("Detalle de reservación no encontrado");
+                }
                 return Ok(detalle);
             }
             catch (Exception ex)

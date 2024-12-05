@@ -3,6 +3,7 @@ using pruebahotel.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace pruebahotel.Data.Services
 {
@@ -31,15 +32,27 @@ namespace pruebahotel.Data.Services
                 fecha_inicio = reserva.fecha_inicio,
                 fecha_final = reserva.fecha_final,
                 estado = reserva.estado,
-                total_pagado = reserva.total_pagado
             };
             _context.Reservaciones.Add(_reserva);
             _context.SaveChanges();
+        
         }
         //listar
-        public List<reservaciones> GetReservacion() => _context.Reservaciones.ToList();
+        public List<reservaciones> GetReservacion()
+        {
+            return _context.Reservaciones
+                       .Include(r => r.DetallesReservacion)
+                       .ThenInclude(d => d.Habitacion)
+                       .ToList();
+        }
         //bustar
-        public reservaciones GetReservacionById(int idreserva) => _context.Reservaciones.FirstOrDefault(n => n.id_reservacion == idreserva);
+        public reservaciones GetReservacionById(int idreserva)
+        {
+            return _context.Reservaciones
+                       .Include(r => r.DetallesReservacion)
+                       .ThenInclude(d => d.Habitacion)
+                       .FirstOrDefault(r => r.id_reservacion == idreserva);
+        }
         //editar
         public reservaciones UpdateReservacionById(int idresrva, ReservaVM reserva)
         {
@@ -52,7 +65,6 @@ namespace pruebahotel.Data.Services
                 _reserva.fecha_inicio = reserva.fecha_inicio;
                 _reserva.fecha_final = reserva.fecha_final;
                 _reserva.estado = reserva.estado;
-                _reserva.total_pagado = reserva.total_pagado;
 
                 _context.SaveChanges();
             }
