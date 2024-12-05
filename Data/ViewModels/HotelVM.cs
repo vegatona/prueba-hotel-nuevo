@@ -10,7 +10,7 @@ namespace pruebahotel.Data.ViewModels
         public string nombre { get; set; }
         public string direccion { get; set; }
         public int telefono { get; set; }
-        public DateTime horarios { get; set; }
+        public string horarios { get; set; }
         public string descripcion { get; set; }
     }
 }
