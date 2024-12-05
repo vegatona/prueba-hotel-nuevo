@@ -13,9 +13,18 @@ namespace pruebahotel.Data.Services
         {
             _context = context;
         }
+        private void ValidarEstado(string estado)
+        {
+            var estadosPermitidos = new List<string> { "Pendiente", "Confirmada", "Cancelada" };
+            if (!estadosPermitidos.Contains(estado))
+            {
+                throw new Exception($"Estado inválido: {estado}. Los estados permitidos son: 'Pendiente', 'Confirmada' o 'Cancelada'.");
+            }
+        }
         //agregar
         public void AddReservacion(ReservaVM reserva)
         {
+            ValidarEstado(reserva.estado);
             var _reserva = new reservaciones()
             {
                 IdUsuario = reserva.IdUsuario,
@@ -34,6 +43,8 @@ namespace pruebahotel.Data.Services
         //editar
         public reservaciones UpdateReservacionById(int idresrva, ReservaVM reserva)
         {
+            ValidarEstado(reserva.estado);
+
             var _reserva = _context.Reservaciones.FirstOrDefault(n => n.id_reservacion == idresrva);
             if (_reserva != null)
             {

@@ -41,7 +41,7 @@ namespace pruebahotel
             services.AddTransient<HotelServices>();
             services.AddTransient<UsuarioServices>();
             services.AddTransient<ReservacionServices>();
-
+            services.AddTransient<DetallesReservaServices>();
 
             services.AddSwaggerGen(c =>
             {

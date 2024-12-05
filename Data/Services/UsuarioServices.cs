@@ -16,6 +16,8 @@ namespace pruebahotel.Data.Services
         //agregar
         public void AddUsuario(UsuarioVM usuario)
         {
+            if (_context.usuarios.Any(u => u.NumTel == usuario.NumTel))
+                throw new Exception("Ya existe un usuario con el mismo número de teléfono.");
             var _usuario = new Usuario()
             {
                 nombre = usuario.nombre,

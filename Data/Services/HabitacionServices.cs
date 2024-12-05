@@ -13,9 +13,20 @@ namespace pruebahotel.Data.Services
         {
             _context = context;
         }
+        private void ValidarEstado(string estado)
+        {
+            var estadosPermitidos = new List<string> { "Disponible", "Ocupada", "Mantenimiento" };
+            if (!estadosPermitidos.Contains(estado))
+            {
+                throw new Exception($"Estado inválido: {estado}. Los estados permitidos son: 'Disponible', 'Ocupada' o 'Mantenimiento'.");
+            }
+        }
+
         //agregar
         public void AddHabitacion(HabitacionVM habitacion)
         {
+            ValidarEstado(habitacion.estado);
+
             var _habitacion = new Habitacion()
             {
                 id_hotel = habitacion.id_hotel,
@@ -36,6 +47,8 @@ namespace pruebahotel.Data.Services
         //editar
         public Habitacion UpdateHabitacionById(int idhabitacion, HabitacionVM habitacion)
         {
+            ValidarEstado(habitacion.estado);
+
             var _habitacion = _context.habitaciones.FirstOrDefault(n => n.Id_habitacion == idhabitacion);
             if (_habitacion != null)
             {

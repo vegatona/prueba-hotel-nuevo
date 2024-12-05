@@ -55,6 +55,9 @@ namespace pruebahotel.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return BadRequest(new { message = "Datos inválidos." });
+
                 _hotelService.AddHoteles(hotel);
                 return Ok();
             }
@@ -70,6 +73,9 @@ namespace pruebahotel.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return BadRequest(new { message = "Datos inválidos." });
+
                 var updatehotel = _hotelService.UpdateHotelById(id, hotel);
                 return Ok(updatehotel);
             }

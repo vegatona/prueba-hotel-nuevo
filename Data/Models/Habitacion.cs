@@ -17,6 +17,7 @@ namespace pruebahotel.Data.Models
         [Required]
         public int precio_noche { get; set; }
         [Required]
+        [RegularExpression("Disponible|Ocupada|Mantenimiento", ErrorMessage = "El estado de la habitación debe ser 'Disponible', 'Ocupada' o 'Mantenimiento'.")]
         public string estado { get; set; }
 
         // Relación con hotel
